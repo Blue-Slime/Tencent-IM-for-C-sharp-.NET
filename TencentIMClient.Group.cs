@@ -51,4 +51,66 @@ public partial class TencentIMClient
         var ret = TIMNative.TIMGroupQuit(groupId, IntPtr.Zero, IntPtr.Zero);
         return ret == 0;
     }
+
+    /// <summary>
+    /// 解散群组
+    /// </summary>
+    public async Task<bool> DeleteGroupAsync(string groupId)
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var ret = TIMNative.TIMGroupDelete(groupId, IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
+
+    /// <summary>
+    /// 邀请成员加入群组
+    /// </summary>
+    public async Task<bool> InviteGroupMemberAsync(string groupId, string[] userIds)
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var param = new
+        {
+            group_invite_member_param_group_id = groupId,
+            group_invite_member_param_identifier_array = userIds
+        };
+
+        var json = JsonSerializer.Serialize(param);
+        var ret = TIMNative.TIMGroupInviteMember(json, IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
+
+    /// <summary>
+    /// 删除群组成员
+    /// </summary>
+    public async Task<bool> DeleteGroupMemberAsync(string groupId, string[] userIds)
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var param = new
+        {
+            group_delete_member_param_group_id = groupId,
+            group_delete_member_param_identifier_array = userIds
+        };
+
+        var json = JsonSerializer.Serialize(param);
+        var ret = TIMNative.TIMGroupDeleteMember(json, IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
+
+    /// <summary>
+    /// 获取已加入的群组列表
+    /// </summary>
+    public async Task<bool> GetJoinedGroupListAsync()
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var ret = TIMNative.TIMGroupGetJoinedGroupList(IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
 }

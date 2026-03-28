@@ -27,4 +27,27 @@ public static partial class TIMNative
         [MarshalAs(UnmanagedType.LPStr)] string group_id,
         IntPtr callback,
         IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupDelete(
+        [MarshalAs(UnmanagedType.LPStr)] string group_id,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupInviteMember(
+        [MarshalAs(UnmanagedType.LPStr)] string json_group_invite_param,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupDeleteMember(
+        [MarshalAs(UnmanagedType.LPStr)] string json_group_delete_param,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupGetJoinedGroupList(
+        IntPtr callback,
+        IntPtr user_data);
 }
