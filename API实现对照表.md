@@ -8,10 +8,10 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMInit` | `TencentIMClient.Initialize()` | ✅ 已实现 | SDK初始化 |
-| `TIMUninit` | `TencentIMClient.Dispose()` | ✅ 已实现 | SDK反初始化 |
-| `TIMLogin` | `TencentIMClient.LoginAsync()` | ✅ 已实现 | 用户登录 |
-| `TIMLogout` | `TencentIMClient.LogoutAsync()` | ✅ 已实现 | 用户登出 |
+| `TIMInit` | `TIMInit()` | ✅ 已实现 | SDK初始化 |
+| `TIMUninit` | `Dispose()` | ✅ 已实现 | SDK反初始化 |
+| `TIMLogin` | `TIMLogin()` | ✅ 已实现 | 用户登录 |
+| `TIMLogout` | `TIMLogout()` | ✅ 已实现 | 用户登出 |
 | `TIMGetLoginUserID` | - | ❌ 未实现 | 获取当前登录用户ID |
 | `TIMGetLoginStatus` | - | ❌ 未实现 | 获取登录状态 |
 | `TIMGetSDKVersion` | - | ❌ 未实现 | 获取SDK版本 |
@@ -51,7 +51,7 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMMsgSendMessage` | `SendGroupTextMessageAsync()`<br>`SendC2CTextMessageAsync()`<br>`SendImageMessageAsync()`<br>`SendFileMessageAsync()` | ✅ 已实现 | 发送消息 |
+| `TIMMsgSendMessage` | `TIMMsgSendMessage()` | ✅ 已实现 | 发送消息 |
 | `TIMMsgCancelSend` | - | ❌ 未实现 | 取消发送 |
 | `TIMMsgBatchSend` | - | ❌ 未实现 | 批量发送 |
 
@@ -72,11 +72,11 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMGroupCreate` | `CreateGroupAsync()` | ✅ 已实现 | 创建群组 |
-| `TIMGroupDelete` | `DeleteGroupAsync()` | ✅ 已实现 | 解散群组 |
-| `TIMGroupJoin` | `JoinGroupAsync()` | ✅ 已实现 | 加入群组 |
-| `TIMGroupQuit` | `QuitGroupAsync()` | ✅ 已实现 | 退出群组 |
-| `TIMGroupGetJoinedGroupList` | `GetJoinedGroupListAsync()` | ✅ 已实现 | 获取已加入群组 |
+| `TIMGroupCreate` | `TIMGroupCreate()` | ✅ 已实现 | 创建群组 |
+| `TIMGroupDelete` | `TIMGroupDelete()` | ✅ 已实现 | 解散群组 |
+| `TIMGroupJoin` | `TIMGroupJoin()` | ✅ 已实现 | 加入群组 |
+| `TIMGroupQuit` | `TIMGroupQuit()` | ✅ 已实现 | 退出群组 |
+| `TIMGroupGetJoinedGroupList` | `TIMGroupGetJoinedGroupList()` | ✅ 已实现 | 获取已加入群组 |
 | `TIMGroupGetGroupInfoList` | - | ❌ 未实现 | 获取群资料 |
 | `TIMGroupModifyGroupInfo` | - | ❌ 未实现 | 修改群资料 |
 
@@ -84,8 +84,8 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMGroupInviteMember` | `InviteGroupMemberAsync()` | ✅ 已实现 | 邀请成员 |
-| `TIMGroupDeleteMember` | `DeleteGroupMemberAsync()` | ✅ 已实现 | 删除成员 |
+| `TIMGroupInviteMember` | `TIMGroupInviteMember()` | ✅ 已实现 | 邀请成员 |
+| `TIMGroupDeleteMember` | `TIMGroupDeleteMember()` | ✅ 已实现 | 删除成员 |
 | `TIMGroupGetMemberInfoList` | - | ❌ 未实现 | 获取成员列表 |
 
 ## 4. 好友管理 (TIMFriendshipManager.h)
@@ -94,9 +94,9 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMFriendshipAddFriend` | `AddFriendAsync()` | ✅ 已实现 | 添加好友 |
-| `TIMFriendshipDeleteFriend` | `DeleteFriendAsync()` | ✅ 已实现 | 删除好友 |
-| `TIMFriendshipGetFriendProfileList` | `GetFriendListAsync()` | ✅ 已实现 | 获取好友列表 |
+| `TIMFriendshipAddFriend` | `TIMFriendshipAddFriend()` | ✅ 已实现 | 添加好友 |
+| `TIMFriendshipDeleteFriend` | `TIMFriendshipDeleteFriend()` | ✅ 已实现 | 删除好友 |
+| `TIMFriendshipGetFriendProfileList` | `TIMFriendshipGetFriendProfileList()` | ✅ 已实现 | 获取好友列表 |
 | `TIMFriendshipModifyFriendProfile` | - | ❌ 未实现 | 修改好友资料 |
 | `TIMFriendshipCheckFriendType` | - | ❌ 未实现 | 检查好友关系 |
 
@@ -104,8 +104,8 @@
 
 | C SDK API | C# 封装方法 | 实现状态 | 说明 |
 |-----------|------------|---------|------|
-| `TIMConvGetConvList` | `GetConversationListAsync()` | ✅ 已实现 | 获取会话列表 |
-| `TIMConvDelete` | `DeleteConversationAsync()` | ✅ 已实现 | 删除会话 |
+| `TIMConvGetConvList` | `TIMConvGetConvList()` | ✅ 已实现 | 获取会话列表 |
+| `TIMConvDelete` | `TIMConvDelete()` | ✅ 已实现 | 删除会话 |
 | `TIMConvSetDraft` | - | ❌ 未实现 | 设置草稿 |
 | `TIMConvGetConvInfo` | - | ❌ 未实现 | 获取会话信息 |
 
