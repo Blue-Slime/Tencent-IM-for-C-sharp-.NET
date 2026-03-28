@@ -31,4 +31,7 @@ public partial class TencentIMClient
         var ret = TIMNative.TIMSetSelfStatus(jsonCurrentUserStatus, IntPtr.Zero, IntPtr.Zero);
         return ret == 0;
     }
+
+    public async Task<bool> TIMSubscribeUserStatus(string jsonIdentifierArray) => !_isLoggedIn ? throw new InvalidOperationException("Not logged in") : TIMNative.TIMSubscribeUserStatus(jsonIdentifierArray, IntPtr.Zero, IntPtr.Zero) == 0;
+    public async Task<bool> TIMUnsubscribeUserStatus(string jsonIdentifierArray) => !_isLoggedIn ? throw new InvalidOperationException("Not logged in") : TIMNative.TIMUnsubscribeUserStatus(jsonIdentifierArray, IntPtr.Zero, IntPtr.Zero) == 0;
 }

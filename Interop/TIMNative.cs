@@ -21,6 +21,12 @@ public static partial class TIMNative
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
     public static extern IntPtr TIMGetSDKVersion();
 
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMSetConfig(
+        [MarshalAs(UnmanagedType.LPStr)] string json_config,
+        IntPtr callback,
+        IntPtr user_data);
+
     // ========== 登录相关 ==========
 
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]

@@ -137,4 +137,28 @@ public partial class TencentIMClient
         var ret = TIMNative.TIMGroupGetGroupInfoList(jsonGroupIdList, IntPtr.Zero, IntPtr.Zero);
         return ret == 0;
     }
+
+    /// <summary>
+    /// 修改群信息 (对应 TIMGroupModifyGroupInfo)
+    /// </summary>
+    public async Task<bool> TIMGroupModifyGroupInfo(string jsonGroupModifyInfoParam)
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var ret = TIMNative.TIMGroupModifyGroupInfo(jsonGroupModifyInfoParam, IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
+
+    /// <summary>
+    /// 修改群成员信息 (对应 TIMGroupModifyMemberInfo)
+    /// </summary>
+    public async Task<bool> TIMGroupModifyMemberInfo(string jsonGroupModifyMemberInfoParam)
+    {
+        if (!_isLoggedIn)
+            throw new InvalidOperationException("Not logged in");
+
+        var ret = TIMNative.TIMGroupModifyMemberInfo(jsonGroupModifyMemberInfoParam, IntPtr.Zero, IntPtr.Zero);
+        return ret == 0;
+    }
 }
