@@ -50,4 +50,17 @@ public static partial class TIMNative
     public static extern int TIMGroupGetJoinedGroupList(
         IntPtr callback,
         IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupGetMemberInfoList(
+        [MarshalAs(UnmanagedType.LPStr)] string group_id,
+        [MarshalAs(UnmanagedType.LPStr)] string json_get_member_info_param,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMGroupGetGroupInfoList(
+        [MarshalAs(UnmanagedType.LPStr)] string json_group_getinfo_param,
+        IntPtr callback,
+        IntPtr user_data);
 }
