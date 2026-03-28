@@ -9,9 +9,9 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     /// <summary>
-    /// 添加好友
+    /// 添加好友 (对应 TIMFriendshipAddFriend)
     /// </summary>
-    public async Task<bool> AddFriendAsync(string userId, string remark = "")
+    public async Task<bool> TIMFriendshipAddFriend(string userId, string remark = "")
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -20,7 +20,7 @@ public partial class TencentIMClient
         {
             friendship_add_friend_param_identifier = userId,
             friendship_add_friend_param_remark = remark,
-            friendship_add_friend_param_add_type = 1 // 单向添加
+            friendship_add_friend_param_add_type = 1
         };
 
         var json = JsonSerializer.Serialize(param);
@@ -29,9 +29,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 删除好友
+    /// 删除好友 (对应 TIMFriendshipDeleteFriend)
     /// </summary>
-    public async Task<bool> DeleteFriendAsync(string userId)
+    public async Task<bool> TIMFriendshipDeleteFriend(string userId)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -47,9 +47,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 获取好友列表
+    /// 获取好友列表 (对应 TIMFriendshipGetFriendProfileList)
     /// </summary>
-    public async Task<bool> GetFriendListAsync()
+    public async Task<bool> TIMFriendshipGetFriendProfileList()
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");

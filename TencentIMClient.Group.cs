@@ -9,9 +9,9 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     /// <summary>
-    /// 创建群组
+    /// 创建群组 (对应 TIMGroupCreate)
     /// </summary>
-    public async Task<string?> CreateGroupAsync(string groupName, string groupType = "Public")
+    public async Task<string?> TIMGroupCreate(string groupName, string groupType = "Public")
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -29,9 +29,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 加入群组
+    /// 加入群组 (对应 TIMGroupJoin)
     /// </summary>
-    public async Task<bool> JoinGroupAsync(string groupId, string helloMsg = "")
+    public async Task<bool> TIMGroupJoin(string groupId, string helloMsg = "")
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -41,9 +41,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 退出群组
+    /// 退出群组 (对应 TIMGroupQuit)
     /// </summary>
-    public async Task<bool> QuitGroupAsync(string groupId)
+    public async Task<bool> TIMGroupQuit(string groupId)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -53,9 +53,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 解散群组
+    /// 解散群组 (对应 TIMGroupDelete)
     /// </summary>
-    public async Task<bool> DeleteGroupAsync(string groupId)
+    public async Task<bool> TIMGroupDelete(string groupId)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -65,9 +65,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 邀请成员加入群组
+    /// 邀请成员加入群组 (对应 TIMGroupInviteMember)
     /// </summary>
-    public async Task<bool> InviteGroupMemberAsync(string groupId, string[] userIds)
+    public async Task<bool> TIMGroupInviteMember(string groupId, string[] userIds)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -84,9 +84,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 删除群组成员
+    /// 删除群组成员 (对应 TIMGroupDeleteMember)
     /// </summary>
-    public async Task<bool> DeleteGroupMemberAsync(string groupId, string[] userIds)
+    public async Task<bool> TIMGroupDeleteMember(string groupId, string[] userIds)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -103,9 +103,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 获取已加入的群组列表
+    /// 获取已加入的群组列表 (对应 TIMGroupGetJoinedGroupList)
     /// </summary>
-    public async Task<bool> GetJoinedGroupListAsync()
+    public async Task<bool> TIMGroupGetJoinedGroupList()
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");

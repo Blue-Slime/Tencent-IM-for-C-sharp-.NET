@@ -25,9 +25,9 @@ public partial class TencentIMClient : IDisposable
     }
 
     /// <summary>
-    /// 初始化SDK
+    /// 初始化SDK (对应 TIMInit)
     /// </summary>
-    public bool Initialize()
+    public bool TIMInit()
     {
         if (_isInitialized) return true;
 
@@ -42,7 +42,6 @@ public partial class TencentIMClient : IDisposable
 
             if (_isInitialized)
             {
-                // 设置消息回调
                 _msgCallback = OnRecvNewMsg;
                 TIMNative.TIMAddRecvNewMsgCallback(_msgCallback, IntPtr.Zero);
             }
@@ -56,14 +55,12 @@ public partial class TencentIMClient : IDisposable
     }
 
     /// <summary>
-    /// 登录
+    /// 登录 (对应 TIMLogin)
     /// </summary>
-    public async Task<bool> LoginAsync(string userId, string userSig)
+    public async Task<bool> TIMLogin(string userId, string userSig)
     {
         if (!_isInitialized)
             throw new InvalidOperationException("SDK not initialized");
-
-        var tcs = new TaskCompletionSource<bool>();
 
         var ret = TIMNative.TIMLogin(userId, userSig, IntPtr.Zero, IntPtr.Zero);
 
@@ -78,9 +75,9 @@ public partial class TencentIMClient : IDisposable
     }
 
     /// <summary>
-    /// 登出
+    /// 登出 (对应 TIMLogout)
     /// </summary>
-    public async Task LogoutAsync()
+    public async Task TIMLogout()
     {
         if (!_isLoggedIn) return;
 

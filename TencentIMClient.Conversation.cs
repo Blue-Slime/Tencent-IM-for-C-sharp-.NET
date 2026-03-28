@@ -10,9 +10,9 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     /// <summary>
-    /// 获取会话列表
+    /// 获取会话列表 (对应 TIMConvGetConvList)
     /// </summary>
-    public async Task<bool> GetConversationListAsync()
+    public async Task<bool> TIMConvGetConvList()
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
@@ -22,9 +22,9 @@ public partial class TencentIMClient
     }
 
     /// <summary>
-    /// 删除会话
+    /// 删除会话 (对应 TIMConvDelete)
     /// </summary>
-    public async Task<bool> DeleteConversationAsync(string convId, TIMConvType convType)
+    public async Task<bool> TIMConvDelete(string convId, TIMConvType convType)
     {
         if (!_isLoggedIn)
             throw new InvalidOperationException("Not logged in");
