@@ -27,6 +27,30 @@ public static partial class TIMNative
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
     public static extern void TIMRemoveRecvNewMsgCallback(
         TIMRecvNewMsgCallback callback);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMMsgRevoke(
+        [MarshalAs(UnmanagedType.LPStr)] string conv_id,
+        int conv_type,
+        [MarshalAs(UnmanagedType.LPStr)] string json_msg_param,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMMsgDelete(
+        [MarshalAs(UnmanagedType.LPStr)] string conv_id,
+        int conv_type,
+        [MarshalAs(UnmanagedType.LPStr)] string json_msgdel_param,
+        IntPtr callback,
+        IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+    public static extern int TIMMsgGetMsgList(
+        [MarshalAs(UnmanagedType.LPStr)] string conv_id,
+        int conv_type,
+        [MarshalAs(UnmanagedType.LPStr)] string json_get_msg_param,
+        IntPtr callback,
+        IntPtr user_data);
 }
 
 /// <summary>

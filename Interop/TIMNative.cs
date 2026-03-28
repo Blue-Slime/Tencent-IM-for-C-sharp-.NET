@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using TencentIM.Native.Models;
 
 namespace TencentIM.Native.Interop;
 
@@ -31,4 +32,13 @@ public static partial class TIMNative
 
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
     public static extern int TIMLogout(IntPtr callback, IntPtr user_data);
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern ulong TIMGetServerTime();
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern TIMLoginStatus TIMGetLoginStatus();
+
+    [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
+    public static extern int TIMGetLoginUserID(IntPtr user_id_buffer);
 }

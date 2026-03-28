@@ -87,6 +87,49 @@ public partial class TencentIMClient : IDisposable
     }
 
     /// <summary>
+    /// 获取SDK版本 (对应 TIMGetSDKVersion)
+    /// </summary>
+    public string TIMGetSDKVersion()
+    {
+        var versionPtr = TIMNative.TIMGetSDKVersion();
+        return Marshal.PtrToStringAnsi(versionPtr) ?? "";
+    }
+
+    /// <summary>
+    /// 获取服务器时间 (对应 TIMGetServerTime)
+    /// </summary>
+    public ulong TIMGetServerTime()
+    {
+        return TIMNative.TIMGetServerTime();
+    }
+
+    /// <summary>
+    /// 获取登录状态 (对应 TIMGetLoginStatus)
+    /// </summary>
+    public TIMLoginStatus TIMGetLoginStatus()
+    {
+        return TIMNative.TIMGetLoginStatus();
+    }
+
+    /// <summary>
+    /// 获取当前登录用户ID (对应 TIMGetLoginUserID)
+    /// </summary>
+    public string TIMGetLoginUserID()
+    {
+        var buffer = new byte[128];
+        var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+        try
+        {
+            TIMNative.TIMGetLoginUserID(handle.AddrOfPinnedObject());
+            return System.Text.Encoding.UTF8.GetString(buffer).TrimEnd('\0');
+        }
+        finally
+        {
+            handle.Free();
+        }
+    }
+
+    /// <summary>
     /// 接收消息回调
     /// </summary>
     private void OnRecvNewMsg(string jsonMsgArray, IntPtr userData)

@@ -41,3 +41,18 @@ public enum TIMElemType
     /// <summary>视频消息</summary>
     Video = 9
 }
+
+/// <summary>
+/// 登录状态
+/// </summary>
+public enum TIMLoginStatus
+{
+    /// <summary>已登出</summary>
+    Logout = 0,
+    /// <summary>登录中</summary>
+    Logging = 1,
+    /// <summary>已登录</summary>
+    Logined = 2,
+    /// <summary>登出中</summary>
+    Logouting = 3
+}
