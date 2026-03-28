@@ -1,0 +1,20 @@
+# 下载ImSDK.dll
+
+## 方法1：从GitHub下载
+
+1. 访问：https://github.com/tencentyun/TIMSDK
+2. 进入 `Windows/ImSDK/` 目录
+3. 下载 `x64/Release/ImSDK.dll`
+4. 复制到：`05-程序模块/TencentIM.Native/native/x64/`
+
+## 方法2：从腾讯云控制台下载
+
+1. 登录腾讯云控制台
+2. 进入即时通信IM产品页
+3. 下载SDK -> Windows C++ SDK
+4. 解压后找到 `ImSDK.dll`
+
+## 注意事项
+
+⚠️ 必须使用64位版本的DLL
+⚠️ 确保DLL与项目平台匹配（x64）
