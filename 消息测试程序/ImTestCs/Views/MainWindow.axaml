@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ImTestCs.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ImTestCs.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="腾讯云IM测试工具" Width="800" Height="600">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid Margin="10" RowDefinitions="Auto,Auto,*,Auto,Auto">
+        <!-- 状态 -->
+        <TextBlock Grid.Row="0" Text="{Binding Status}" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+        <!-- SDK配置 -->
+        <StackPanel Grid.Row="1" Spacing="5">
+            <Grid ColumnDefinitions="100,*,100">
+                <TextBlock Grid.Column="0" Text="SdkAppId:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding SdkAppId}" Watermark="输入SdkAppId"/>
+                <Button Grid.Column="2" Content="初始化SDK" Command="{Binding InitSdkCommand}" Margin="5,0,0,0"/>
+            </Grid>
+            <Grid ColumnDefinitions="100,*">
+                <TextBlock Grid.Column="0" Text="UserId:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding UserId}" Watermark="输入用户ID"/>
+            </Grid>
+            <Grid ColumnDefinitions="100,*">
+                <TextBlock Grid.Column="0" Text="UserSig:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding UserSig}" Watermark="输入UserSig"/>
+            </Grid>
+            <Button Content="登录" Command="{Binding LoginCommand}" IsEnabled="{Binding !IsLoggedIn}"/>
+        </StackPanel>
+
+        <!-- 日志区 -->
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="0,10">
+            <ListBox ItemsSource="{Binding LogMessages}"/>
+        </Border>
+
+        <!-- 发送消息 -->
+        <StackPanel Grid.Row="3" Spacing="5" Margin="0,10,0,0">
+            <Grid ColumnDefinitions="100,*">
+                <TextBlock Grid.Column="0" Text="接收方ID:" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Text="{Binding TargetUserId}" Watermark="输入接收方用户ID"/>
+            </Grid>
+            <TextBox Text="{Binding MessageToSend}" Watermark="输入要发送的消息"/>
+        </StackPanel>
+
+        <Button Grid.Row="4" Content="发送消息" Command="{Binding SendMessageCommand}" IsEnabled="{Binding IsLoggedIn}" Margin="0,5,0,0"/>
+    </Grid>
+
+</Window>
