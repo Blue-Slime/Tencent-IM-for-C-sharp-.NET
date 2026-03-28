@@ -1,3 +1,5 @@
+using TencentIM.Native.Interop;
+
 namespace TencentIM.Native;
 
 /// <summary>
@@ -6,11 +8,11 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     public async Task<bool> TIMSubscribeOfficialAccount(string officialAccountId)
-        => await Task.Run(() => TIMNative.TIMSubscribeOfficialAccount(officialAccountId, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMSubscribeOfficialAccount(officialAccountId, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 
     public async Task<bool> TIMUnsubscribeOfficialAccount(string officialAccountId)
-        => await Task.Run(() => TIMNative.TIMUnsubscribeOfficialAccount(officialAccountId, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMUnsubscribeOfficialAccount(officialAccountId, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 
     public async Task<bool> TIMGetOfficialAccountsInfo(string jsonOfficialAccountIdArray)
-        => await Task.Run(() => TIMNative.TIMGetOfficialAccountsInfo(jsonOfficialAccountIdArray, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMGetOfficialAccountsInfo(jsonOfficialAccountIdArray, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 }

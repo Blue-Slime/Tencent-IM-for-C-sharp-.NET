@@ -1,3 +1,5 @@
+using TencentIM.Native.Interop;
+
 namespace TencentIM.Native;
 
 /// <summary>
@@ -6,11 +8,11 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     public async Task<bool> TIMMsgSetOfflinePushToken(string jsonTokenParam)
-        => await Task.Run(() => TIMNative.TIMMsgSetOfflinePushToken(jsonTokenParam, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMMsgSetOfflinePushToken(jsonTokenParam, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 
     public async Task<bool> TIMMsgDoBackground(int unreadCount)
-        => await Task.Run(() => TIMNative.TIMMsgDoBackground(unreadCount, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMMsgDoBackground(unreadCount, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 
     public async Task<bool> TIMMsgDoForeground()
-        => await Task.Run(() => TIMNative.TIMMsgDoForeground(IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.TIMMsgDoForeground((TIMCommCallback?)null, IntPtr.Zero) == 0);
 }

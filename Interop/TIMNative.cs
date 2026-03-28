@@ -33,7 +33,7 @@ public static partial class TIMNative
     public static extern int TIMLogin(
         [MarshalAs(UnmanagedType.LPStr)] string user_id,
         [MarshalAs(UnmanagedType.LPStr)] string user_sig,
-        IntPtr callback,
+        TIMCommCallback callback,
         IntPtr user_data);
 
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
@@ -48,3 +48,13 @@ public static partial class TIMNative
     [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
     public static extern int TIMGetLoginUserID(IntPtr user_id_buffer);
 }
+
+/// <summary>
+/// 通用回调委托
+/// </summary>
+[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+public delegate void TIMCommCallback(
+    int code,
+    [MarshalAs(UnmanagedType.LPStr)] string desc,
+    [MarshalAs(UnmanagedType.LPStr)] string json_params,
+    IntPtr user_data);

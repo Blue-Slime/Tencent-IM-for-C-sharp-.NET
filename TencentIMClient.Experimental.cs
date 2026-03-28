@@ -1,3 +1,5 @@
+using TencentIM.Native.Interop;
+
 namespace TencentIM.Native;
 
 /// <summary>
@@ -6,7 +8,7 @@ namespace TencentIM.Native;
 public partial class TencentIMClient
 {
     public async Task<bool> callExperimentalAPI(string jsonParam)
-        => await Task.Run(() => TIMNative.callExperimentalAPI(jsonParam, IntPtr.Zero, IntPtr.Zero) == 0);
+        => await Task.Run(() => TIMNative.callExperimentalAPI(jsonParam, (TIMCommCallback?)null, IntPtr.Zero) == 0);
 
     private TIMExperimentalAPICallback? _experimentalApiCb;
     public event Action<string>? OnExperimentalAPIRequest;

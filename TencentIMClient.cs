@@ -14,6 +14,8 @@ public partial class TencentIMClient : IDisposable
     private bool _isInitialized;
     private bool _isLoggedIn;
     private TIMRecvNewMsgCallback? _msgCallback;
+    private TaskCompletionSource<bool>? _loginTcs;
+    private TIMCommCallback? _loginCallback;
 
     public event EventHandler<MessageReceivedEventArgs>? OnMessageReceived;
     public event EventHandler? OnConnected;
@@ -62,16 +64,30 @@ public partial class TencentIMClient : IDisposable
         if (!_isInitialized)
             throw new InvalidOperationException("SDK not initialized");
 
-        var ret = TIMNative.TIMLogin(userId, userSig, IntPtr.Zero, IntPtr.Zero);
-
-        if (ret == 0)
+        _loginTcs = new TaskCompletionSource<bool>();
+        _loginCallback = (code, desc, json, userData) =>
         {
-            _isLoggedIn = true;
-            OnConnected?.Invoke(this, EventArgs.Empty);
-            return true;
+            if (code == 0)
+            {
+                _isLoggedIn = true;
+                OnConnected?.Invoke(this, EventArgs.Empty);
+                _loginTcs?.TrySetResult(true);
+            }
+            else
+            {
+                Console.WriteLine($"Login failed: code={code}, desc={desc}");
+                _loginTcs?.TrySetResult(false);
+            }
+        };
+
+        var ret = TIMNative.TIMLogin(userId, userSig, _loginCallback, IntPtr.Zero);
+        if (ret != 0)
+        {
+            _loginTcs.TrySetResult(false);
+            return false;
         }
 
-        return false;
+        return await _loginTcs.Task;
     }
 
     /// <summary>
@@ -136,23 +152,24 @@ public partial class TencentIMClient : IDisposable
     {
         try
         {
-            // 解析JSON消息
-            var messages = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(jsonMsgArray);
-            if (messages == null) return;
+            Console.WriteLine($"[DEBUG] 收到消息JSON: {jsonMsgArray}");
 
-            foreach (var msg in messages)
+            // 先触发原始消息事件，让UI显示
+            OnMessageReceived?.Invoke(this, new MessageReceivedEventArgs
             {
-                OnMessageReceived?.Invoke(this, new MessageReceivedEventArgs
-                {
-                    SenderId = msg.GetValueOrDefault("sender_id")?.ToString() ?? "",
-                    Content = msg.GetValueOrDefault("content")?.ToString() ?? ""
-                });
-            }
+                SenderId = "RAW_JSON",
+                Content = jsonMsgArray
+            });
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Parse message error: {ex.Message}");
         }
+    }
+
+    private void AddLog(string message)
+    {
+        Console.WriteLine($"[TencentIMClient] {message}");
     }
 
     public void Dispose()
